@@ -17,13 +17,22 @@ namespace Shoes
     {
        Store.DeleteAll();
     }
-    
+
     [Fact]
     public void Test_StoresEmptyAtFirst()
     {
       int result = Store.GetAll().Count;
 
       Assert.Equal(0, result);
+    }
+
+    [Fact]
+    public void Test_Equal_ReturnsTrueForSameName()
+    {
+      Store firstStore = new Store("Sears");
+      Store secondStore = new Store("Sears");
+
+      Assert.Equal(firstStore, secondStore);
     }
   }
 }
