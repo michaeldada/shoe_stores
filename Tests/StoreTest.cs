@@ -77,7 +77,7 @@ namespace Shoes
       Store foundStore = Store.Find(testStore.GetId());
 
       //Assert
-      Assert.Equal(testStore, foundStore);
+      Assert.Equal(foundStore, testStore);
     }
 
     [Fact]
