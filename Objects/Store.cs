@@ -101,6 +101,72 @@ namespace Shoes
       }
     }
 
+    public void AddBrand(int BrandId)
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) OUTPUT INSERTED.id VALUES (@StoreId, @BrandId);", conn);
+
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(storeIdParameter);
+
+      SqlParameter brandIdParameter = new SqlParameter();
+      brandIdParameter.ParameterName = "@BrandId";
+      brandIdParameter.Value = BrandId;
+      cmd.Parameters.Add(brandIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public List<Brand> GetBrands()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE stores.id=@StoreId;", conn);
+      SqlParameter storeIdParameter = new SqlParameter();
+      storeIdParameter.ParameterName = "@StoreId";
+      storeIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(storeIdParameter);
+      rdr = cmd.ExecuteReader();
+
+      List<Brand> brands = new List<Brand> {};
+      while(rdr.Read())
+      {
+        int brandId = rdr.GetInt32(0);
+        string brandName = rdr.GetString(1);
+
+        Brand newBrand = new Brand(brandName, brandId);
+        brands.Add(newBrand);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return brands;
+    }
+
     public void Update(string newName)
     {
       SqlConnection conn = DB.Connection();
@@ -174,7 +240,7 @@ namespace Shoes
       SqlCommand cmd = new SqlCommand("SELECT * FROM stores WHERE id = @StoreId;", conn);
       SqlParameter storeIdParameter = new SqlParameter();
       storeIdParameter.ParameterName = "@StoreId";
-      storeIdParameter.Value = id.ToString();
+      storeIdParameter.Value = id;
       cmd.Parameters.Add(storeIdParameter);
       rdr = cmd.ExecuteReader();
 

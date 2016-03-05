@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Shoes
 {
@@ -92,6 +93,26 @@ namespace Shoes
       List<Store> resultStoreList = Store.GetAll();
 
       Assert.Equal(testStoreList, resultStoreList);
+
+
+
+    }
+    [Fact]
+    public void Test_GetAllBrandsAtStore_RetrievesAllBrandsFromGivenStore()
+    {
+      Store newStore = new Store("Sears");
+      newStore.Save();
+
+      Brand newBrand = new Brand("Nike");
+      newBrand.Save();
+
+      newStore.AddBrand(newBrand.GetId());
+
+      List<Brand> resultBrands = newStore.GetBrands();
+      List<Brand> testBrands = new List<Brand> { newBrand };
+
+      Assert.Equal(testBrands, resultBrands);
+
 
 
 
