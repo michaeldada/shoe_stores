@@ -14,10 +14,7 @@ namespace Shoes
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=shoe_stores_test;Integrated Security=SSPI;";
     }
 
-    public void Dispose()
-    {
-       Store.DeleteAll();
-    }
+
 
     [Fact]
     public void Test_StoresEmptyAtFirst()
@@ -102,13 +99,16 @@ namespace Shoes
     {
       Store newStore = new Store("Sears");
       newStore.Save();
-
+      Console.WriteLine(newStore.GetName()+" "+newStore.GetId());
       Brand newBrand = new Brand("Nike");
       newBrand.Save();
+      Console.WriteLine(newBrand.GetName()+" "+newBrand.GetId());
 
       newStore.AddBrand(newBrand.GetId());
-
+      Console.WriteLine(newStore.GetBrands().Count);
       List<Brand> resultBrands = newStore.GetBrands();
+      Console.WriteLine(resultBrands.Count);
+
       List<Brand> testBrands = new List<Brand> { newBrand };
 
       Assert.Equal(testBrands, resultBrands);
@@ -117,5 +117,11 @@ namespace Shoes
 
 
     }
+    public void Dispose()
+    {
+       Store.DeleteAll();
+
+    }
+
   }
 }

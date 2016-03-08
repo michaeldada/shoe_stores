@@ -104,10 +104,10 @@ namespace Shoes
     public void AddBrand(int BrandId)
     {
       SqlConnection conn = DB.Connection();
-      SqlDataReader rdr;
+      SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) OUTPUT INSERTED.id VALUES (@StoreId, @BrandId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (store_id, brand_id) VALUES (@StoreId, @BrandId);", conn);
 
       SqlParameter storeIdParameter = new SqlParameter();
       storeIdParameter.ParameterName = "@StoreId";
@@ -117,13 +117,13 @@ namespace Shoes
       SqlParameter brandIdParameter = new SqlParameter();
       brandIdParameter.ParameterName = "@BrandId";
       brandIdParameter.Value = BrandId;
+      Console.WriteLine(BrandId);
       cmd.Parameters.Add(brandIdParameter);
+      Console.WriteLine(rdr);
       rdr = cmd.ExecuteReader();
 
-      while(rdr.Read())
-      {
-        this._id = rdr.GetInt32(0);
-      }
+      // cmd.ExecuteNonQuery();
+
       if (rdr != null)
       {
         rdr.Close();
@@ -136,11 +136,12 @@ namespace Shoes
 
     public List<Brand> GetBrands()
     {
+
       SqlConnection conn = DB.Connection();
-      SqlDataReader rdr;
+      SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE stores.id=@StoreId;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT brands.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE stores.id = @StoreId;", conn);
       SqlParameter storeIdParameter = new SqlParameter();
       storeIdParameter.ParameterName = "@StoreId";
       storeIdParameter.Value = this.GetId();
@@ -150,10 +151,13 @@ namespace Shoes
       List<Brand> brands = new List<Brand> {};
       while(rdr.Read())
       {
+
         int brandId = rdr.GetInt32(0);
         string brandName = rdr.GetString(1);
 
         Brand newBrand = new Brand(brandName, brandId);
+
+
         brands.Add(newBrand);
       }
       if (rdr != null)
@@ -164,6 +168,7 @@ namespace Shoes
       {
         conn.Close();
       }
+      Console.WriteLine(brands.Count);
       return brands;
     }
 
