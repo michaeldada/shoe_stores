@@ -45,8 +45,9 @@ namespace Shoes
         newBrand.Save();
         SelectedStore.AddBrand(newBrand.GetId());
         List<Brand> brands = SelectedStore.GetBrands();
+        Dictionary<string, object> storeBrands = new Dictionary<string, object>{{"store", SelectedStore}, {"brands", brands}};
 
-        return View["storeBrands.cshtml", brands];
+        return View["storeBrands.cshtml", storeBrands];
       };
 
       Get["/stores"] = _ => {
@@ -62,8 +63,9 @@ namespace Shoes
       Get["/storeBrands/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         List<Brand> brands = SelectedStore.GetBrands();
+        Dictionary<string, object> storeBrands = new Dictionary<string, object>{{"store", SelectedStore}, {"brands", brands}};
 
-        return View["storeBrands.cshtml", brands];
+        return View["storeBrands.cshtml", storeBrands];
       };
 
       Get["/brandStores/{id}"] = parameters => {
