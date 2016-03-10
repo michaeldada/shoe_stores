@@ -99,15 +99,15 @@ namespace Shoes
     {
       Store newStore = new Store("Sears");
       newStore.Save();
-      Console.WriteLine(newStore.GetName()+" "+newStore.GetId());
+      // Console.WriteLine(newStore.GetName()+" "+newStore.GetId());
       Brand newBrand = new Brand("Nike");
       newBrand.Save();
-      Console.WriteLine(newBrand.GetName()+" "+newBrand.GetId());
+      // Console.WriteLine(newBrand.GetName()+" "+newBrand.GetId());
 
       newStore.AddBrand(newBrand.GetId());
-      Console.WriteLine(newStore.GetBrands().Count);
+      // Console.WriteLine(newStore.GetBrands().Count);
       List<Brand> resultBrands = newStore.GetBrands();
-      Console.WriteLine(resultBrands.Count);
+      // Console.WriteLine(resultBrands.Count);
 
       List<Brand> testBrands = new List<Brand> { newBrand };
 
@@ -120,6 +120,7 @@ namespace Shoes
     public void Dispose()
     {
        Store.DeleteAll();
+       Brand.DeleteAll();
 
     }
 
