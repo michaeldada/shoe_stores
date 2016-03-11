@@ -1,5 +1,5 @@
 <h2>Add Store to @Model.GetName()</h2>
-<form action="/addStore/@Model.GetId()" method="post">
+<form action="/stores/new/@Model.GetId()" method="post">
   <input type="hidden" name="_method" value="POST">
   <input name="brand-id" type="hidden" value="@Model.GetId()">
   <label for="new-store">New Store</label>

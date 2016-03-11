@@ -15,14 +15,14 @@
           {
             <li>
             <h3>@brand.GetName()</h3>
-            <a href="/brandStores/@brand.GetId()">See List of stores that sell @brand.GetName()</a> |<a href="/addStore/@brand.GetId()">Add a seller to @brand.GetName()</a>
+            <a href="/brandStores/@brand.GetId()">See List of stores that sell @brand.GetName()</a> |<a href="/stores/new/@brand.GetId()">Add a seller to @brand.GetName()</a>
             </li>
           }
         }
       }
     </ul>
     <h3>Add a new Brand</h3>
-    <form method="post" action="/addBrand">
+    <form method="post" action="/brands/new">
       Brand name:
       <input type="text" name="newBrand-name">
       <button type="submit">Add</button>

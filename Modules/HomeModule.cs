@@ -12,26 +12,26 @@ namespace Shoes
           return View["index.cshtml"];
       };
 
-      Post["/addStore"] = _ => {
+      Post["/stores/new"] = _ => {
         Store newStore = new Store(Request.Form["newStore-name"]);
         newStore.Save();
         List<Store> stores = Store.GetAll();
         return View["stores.cshtml", stores];
       };
 
-      Post["/addBrand"] = _ => {
+      Post["/brands/new"] = _ => {
         Brand newBrand = new Brand(Request.Form["newBrand-name"]);
         newBrand.Save();
         List<Brand> brands = Brand.GetAll();
         return View["brands.cshtml", brands];
       };
 
-      Get["/addStore/{id}"] = parameters => {
+      Get["/stores/new/{id}"] = parameters => {
         Brand SelectedBrand = Brand.Find(parameters.id);
         return View["addStore.cshtml", SelectedBrand];
       };
 
-      Post["/addStore/{id}"] = parameters => {
+      Post["/stores/new/{id}"] = parameters => {
         Brand SelectedBrand = Brand.Find(parameters.id);
         Store newStore = new Store(Request.Form["new-store"]);
         newStore.Save();
@@ -41,12 +41,12 @@ namespace Shoes
         return View["brandStores.cshtml", stores];
       };
 
-      Get["/addBrand/{id}"] = parameters => {
+      Get["/brands/new/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         return View["addBrand.cshtml", SelectedStore];
       };
 
-      Post["/addBrand/{id}"] = parameters => {
+      Post["/brands/new/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         Brand newBrand = new Brand(Request.Form["new-brand"]);
         newBrand.Save();
@@ -80,25 +80,25 @@ namespace Shoes
         return View["brandStores.cshtml", stores];
       };
 
-      Get["/editStore/{id}"] = parameters => {
+      Get["/stores/edit/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         return View["store_edit.cshtml", SelectedStore];
       };
 
-      Patch["/editStore/{id}"] = parameters => {
+      Patch["/stores/edit/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         SelectedStore.Update(Request.Form["store-name"]);
         List<Store> stores = Store.GetAll();
         return View["stores.cshtml", stores];
       };
 
-      Delete["/deleteAllStores"] = _ => {
+      Delete["/stores/deleteAll"] = _ => {
         Store.DeleteAll();
         List<Store> stores = Store.GetAll();
         return View["stores.cshtml", stores];
       };
 
-      Delete["/deleteStore/{id}"] = parameters => {
+      Delete["/stores/delete/{id}"] = parameters => {
         Store SelectedStore = Store.Find(parameters.id);
         SelectedStore.Delete();
         List<Store> stores = Store.GetAll();

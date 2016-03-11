@@ -15,20 +15,20 @@
           {
             <li>
             <h3>@store.GetName()</h3>
-            <a href="/storeBrands/@store.GetId()">See List of Brands at @store.GetName()</a> |<a href="/addBrand/@store.GetId()">Add a Brand to @store.GetName()</a> <a href="/editStore/@store.GetId()">Edit Name</a> |
-              <form action="/deleteStore/@store.GetId()" method="post"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger" type="submit">Delete Store</button></form>
+            <a href="/storeBrands/@store.GetId()">See List of Brands at @store.GetName()</a> |<a href="/brands/new/@store.GetId()">Add a Brand to @store.GetName()</a> <a href="/stores/edit/@store.GetId()">Edit Name</a> |
+              <form action="/stores/delete/@store.GetId()" method="post"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger" type="submit">Delete Store</button></form>
             </li>
           }
         }
       }
     </ul>
     <h3>Add a new Store</h3>
-    <form method="post" action="/addStore">
+    <form method="post" action="/stores/new">
       Store name:
       <input type="text" name="newStore-name">
       <button type="submit">Add</button>
     </form>
 
     <a href="/">Home</a>
-    <form action="/deleteAllStores" method="post"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger" type="submit">Delete ALL Stores!</button></form>
+    <form action="/stores/deleteAll" method="post"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger" type="submit">Delete ALL Stores!</button></form>
   </div>

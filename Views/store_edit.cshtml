@@ -1,5 +1,5 @@
 <h2>Edit info for @Model.GetName()</h2>
-<form action="/editStore/@Model.GetId()" method="post">
+<form action="/stores/edit/@Model.GetId()" method="post">
   <input type="hidden" name="_method" value="PATCH">
   <input name="store-id" type="hidden" value="@Model.GetId()">
   <label for="store-name">Store name</label>
