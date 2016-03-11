@@ -5,8 +5,9 @@
     <link rel='stylesheet' href='Content/css/styles.css'>
   </head>
   <div class="container">
+<h3>List of shoe brands at @Model["store"].GetName()</h3>
     <ul>
-      @foreach (var brand in Model)
+      @foreach (var brand in Model["brands"])
       {
         <li>@brand.GetName()</li>
       }
@@ -14,4 +15,5 @@
     <a href="/">Home</a>
     <br><br>
     <a href="/stores">Back to stores</a>
+    <a href='/addBrand/@Model["store"].GetId()'>Add brand to this store</a>
   </div>
