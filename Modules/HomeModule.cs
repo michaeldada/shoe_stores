@@ -104,8 +104,6 @@ namespace Shoes
         List<Store> stores = Store.GetAll();
         return View["stores.cshtml", stores];
       };
-
-
     }
   }
 }

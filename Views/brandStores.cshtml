@@ -5,14 +5,12 @@
     <link rel='stylesheet' href='Content/css/styles.css'>
   </head>
   <div class="container">
-
     <ul>
-          @foreach (var store in Model)
-          {
-            <li>@store.GetName()</li>
-          }
+        @foreach (var store in Model)
+        {
+          <li>@store.GetName()</li>
+        }
     </ul>
-
     <a href="/">Home</a>
     <br><br>
     <a href="/brands">Back to brands</a>
