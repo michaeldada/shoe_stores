@@ -117,12 +117,8 @@ namespace Shoes
       SqlParameter brandIdParameter = new SqlParameter();
       brandIdParameter.ParameterName = "@BrandId";
       brandIdParameter.Value = BrandId;
-      Console.WriteLine(BrandId);
       cmd.Parameters.Add(brandIdParameter);
-      Console.WriteLine(rdr);
       rdr = cmd.ExecuteReader();
-
-      // cmd.ExecuteNonQuery();
 
       if (rdr != null)
       {
@@ -168,7 +164,6 @@ namespace Shoes
       {
         conn.Close();
       }
-      Console.WriteLine(brands.Count);
       return brands;
     }
 
