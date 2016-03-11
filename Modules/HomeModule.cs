@@ -19,6 +19,13 @@ namespace Shoes
         return View["stores.cshtml", stores];
       };
 
+      Post["/addBrand"] = _ => {
+        Brand newBrand = new Brand(Request.Form["newBrand-name"]);
+        newBrand.Save();
+        List<Brand> brands = Brand.GetAll();
+        return View["brands.cshtml", brands];
+      };
+
       Get["/addStore/{id}"] = parameters => {
         Brand SelectedBrand = Brand.Find(parameters.id);
         return View["addStore.cshtml", SelectedBrand];
