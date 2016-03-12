@@ -203,7 +203,7 @@ namespace Shoes
       SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO stores_brands (brand_id, store_id) VALUES (@BrandId, @StoreId);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO brands_stores (brand_id, store_id) VALUES (@BrandId, @StoreId);", conn);
 
       SqlParameter storeIdParameter = new SqlParameter();
       storeIdParameter.ParameterName = "@StoreId";
@@ -233,7 +233,7 @@ namespace Shoes
       SqlDataReader rdr = null;
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM stores JOIN stores_brands ON (stores.id = stores_brands.store_id) JOIN brands ON (stores_brands.brand_id = brands.id) WHERE brands.id = @BrandId;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT stores.* FROM stores JOIN brands_stores ON (stores.id = brands_stores.store_id) JOIN brands ON (brands_stores.brand_id = brands.id) WHERE brands.id = @BrandId;", conn);
       SqlParameter BrandIdParameter = new SqlParameter();
       BrandIdParameter.ParameterName = "@BrandId";
       BrandIdParameter.Value = this.GetId();

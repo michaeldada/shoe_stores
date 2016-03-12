@@ -17,6 +17,7 @@ _This site allows the user to create a list of shoe stores and add a list of bra
     GO
     CREATE TABLE stores (id INT IDENTITY(1,1), name VARCHAR(255));
     CREATE TABLE brands (id INT IDENTITY(1,1), name VARCHAR(255));
+    CREATE TABLE brands_stores(id INT IDENTITY(1,1), store_id INT, brand_id INT);
     GO_
 
 * _In Powershell, run dnu restore_
